@@ -94,7 +94,7 @@
                 android:layout_marginTop="32dp"
                 android:backgroundTint="@color/light_black"
                 android:text="Search"
-                android:fontFamily="@font/poppins_regular"
+                android:fontFamily="@font/poppins_medium"
                 android:textSize="17sp"
                 android:textColor="@color/main_white"
                 app:layout_constraintBottom_toBottomOf="parent"

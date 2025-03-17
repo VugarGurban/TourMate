@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         val appDatabase = AppDatabase.getInstance(this)
         lifecycleScope.launch(Dispatchers.IO) {
             val cities = appDatabase.citiesDao().getAllCities()
-            cities
         }
 
 
