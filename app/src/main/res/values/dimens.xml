@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_button_height">62dp</dimen>
+    <dimen name="default_corner_radius">42dp</dimen>
+    <dimen name="secondary_corner_radius">26dp</dimen>
+    <dimen name="splash_screen_text">52dp</dimen>
+
+    <dimen name="margin_xxsmall">4dp</dimen>
+    <dimen name="margin_xsmall">6dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_xmedium">18dp</dimen>
+    <dimen name="margin_xxmedium">26dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_xlarge">64dp</dimen>
+
+    <dimen name="padding_xxsmall">2dp</dimen>
+    <dimen name="padding_xsmall">4dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_large_small">10dp</dimen>
+    <dimen name="padding_medium">14dp</dimen>
+    <dimen name="padding_xmedium">24dp</dimen>
+    <dimen name="padding_large">32dp</dimen>
+    <dimen name="padding_xlarge">64dp</dimen>
+
+    <dimen name="text_xxsmall">10sp</dimen>
+    <dimen name="text_xsmall">15sp</dimen>
+    <dimen name="text_small">17sp</dimen>
+    <dimen name="text_medium">18sp</dimen>
+    <dimen name="text_large">20sp</dimen>
+    <dimen name="text_xlarge">26sp</dimen>
+    <dimen name="text_xxlarge">30sp</dimen>
+</resources>

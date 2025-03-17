@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.example.NavigationListener
 import com.example.tourmate.Database.AppDatabase
 import com.example.tourmate.Database.DatabaseCopyHelper
 import com.example.tourmate.managers.SharedPreferencesManager.SharedPreferencesManager
@@ -30,7 +29,6 @@ private lateinit var  bottomNavigationView:BottomNavigationView
         lifecycleScope.launch(Dispatchers.IO) {
             val cities = appDatabase.citiesDao().getAllCities()
         }
-
 
         copyDatabase()
 
