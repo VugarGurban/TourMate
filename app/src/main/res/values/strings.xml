@@ -2,4 +2,12 @@
     <string name="app_name">TourMate</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="get_started">Get Started</string>
+    <string name="onboardingFragment_text">Create your dream trip with ease. Choose a destination, find the perfect place to stay, and create an itinerary that suits your preferences.</string>
+    <string name="plan_your_trip">Plan Your Trip</string>
+    <string name="select_the_city">Select the city</string>
+    <string name="selectFragment_text">Please select the city for getting information</string>
+    <string name="search">Search</string>
+    <string name="distance_unit">km</string>
+    <string name="time_unit">min</string>
 </resources>

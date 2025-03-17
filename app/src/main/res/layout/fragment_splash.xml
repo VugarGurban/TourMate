@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="TourMate"
+        android:text="@string/app_name"
         android:textColor="@color/main_white"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
