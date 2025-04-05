@@ -25,10 +25,7 @@ private lateinit var  bottomNavigationView:BottomNavigationView
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
 
         SharedPreferencesManager(this)
-        val appDatabase = AppDatabase.getInstance(this)
-        lifecycleScope.launch(Dispatchers.IO) {
-            val cities = appDatabase.citiesDao().getAllCities()
-        }
+        AppDatabase.getInstance(this)
 
         copyDatabase()
 

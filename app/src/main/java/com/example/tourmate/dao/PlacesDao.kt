@@ -19,8 +19,11 @@ interface PlacesDao {
     fun deletePlace(place: PlacesModel)
 
     @Query("SELECT * FROM places")
-    fun getAllPlaces(): List<PlacesModel>
+    fun getAllPlaces(): MutableList<PlacesModel>
 
-    @Query("SELECT * FROM places WHERE id = :id")
-    fun getPlace(id: Int): PlacesModel
+    @Query("SELECT * FROM places WHERE city_id = :id")
+    fun getPlace(id: Int): MutableList<PlacesModel>
+
+    @Query("SELECT * FROM places WHERE category_id = :id and city_id = :cityId")
+    fun getPlaceByCategory(id: Int, cityId: Int): MutableList<PlacesModel>
 }

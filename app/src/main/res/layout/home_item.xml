@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/default_grey_border">
+    android:background="@drawable/grey_border"
+    android:layout_marginTop="@dimen/margin_medium">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
@@ -13,16 +14,16 @@
         android:layout_marginStart="@dimen/margin_xxsmall"
         android:layout_marginTop="@dimen/margin_xxsmall"
         android:layout_marginBottom="@dimen/margin_xxsmall"
-        app:cardCornerRadius="@dimen/secondary_corner_radius"
+        app:cardCornerRadius="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_height="match_parent"
             android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -43,14 +44,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_xsmall"
-        android:text="Place Name"
+        android:layout_marginTop="@dimen/margin_xxsmall"
         android:fontFamily="@font/poppins_medium"
+        android:text="Place Name"
+        android:textColor="@color/light_black"
         android:textSize="@dimen/text_xsmall"
-        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/cardview"
-        app:layout_constraintTop_toTopOf="@id/cardview"
-        />
+        app:layout_constraintTop_toTopOf="@id/cardview" />
 
     <TextView
         android:id="@+id/categoryName"
@@ -64,7 +64,7 @@
         android:background="@drawable/secondary_grey_border"
         android:text="Category"
         android:fontFamily="@font/poppins_medium"
-        android:textColor="@color/black"
+        android:textColor="@color/light_black"
         android:textSize="@dimen/text_xxsmall"
         app:layout_constraintStart_toStartOf="@id/placeName"
         app:layout_constraintTop_toBottomOf="@id/placeName"
@@ -74,22 +74,26 @@
         android:id="@+id/ic_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_large_small"
         app:layout_constraintStart_toStartOf="@id/categoryName"
         app:layout_constraintTop_toBottomOf="@id/categoryName"
         android:src="@drawable/ic_location"/>
 
     <TextView
         android:id="@+id/location"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_xxsmall"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/poppins_light"
         android:text="Location"
+        android:textColor="@color/light_black"
         android:textSize="@dimen/text_xxsmall"
-        app:layout_constraintStart_toEndOf="@id/ic_location"
-        app:layout_constraintTop_toTopOf="@id/ic_location"
         app:layout_constraintBottom_toBottomOf="@id/ic_location"
-        android:fontFamily="@font/poppins_light"/>
+        app:layout_constraintEnd_toStartOf="@+id/ic_rating"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/ic_location"
+        app:layout_constraintTop_toTopOf="@id/ic_location" />
 
     <ImageView
         android:id="@+id/ic_rating"
@@ -110,6 +114,7 @@
         android:fontFamily="@font/poppins_regular"
         android:text="4.3"
         android:textSize="@dimen/text_xxsmall"
+        android:textColor="@color/light_black"
         app:layout_constraintTop_toTopOf="@+id/ic_rating"
         app:layout_constraintBottom_toBottomOf="@id/ic_rating"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -122,6 +127,8 @@
         android:fontFamily="@font/poppins_regular"
         android:text="@string/time_unit"
         android:textSize="@dimen/text_xxsmall"
+        android:textColor="@color/light_black"
+        app:layout_constraintTop_toBottomOf="@id/distance_text_label"
         app:layout_constraintBottom_toTopOf="@id/rating_text"
         app:layout_constraintEnd_toEndOf="@id/rating_text" />
 
@@ -133,6 +140,7 @@
         android:fontFamily="@font/poppins_regular"
         android:text="28"
         android:textSize="@dimen/text_xxsmall"
+        android:textColor="@color/light_black"
         app:layout_constraintEnd_toStartOf="@id/time_text_label"
         app:layout_constraintTop_toTopOf="@+id/time_text_label"
         app:layout_constraintBottom_toBottomOf="@+id/time_text_label"/>
@@ -151,12 +159,15 @@
         android:id="@+id/distance_text_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_xxsmall"
         android:layout_marginBottom="@dimen/margin_xxsmall"
         android:fontFamily="@font/poppins_regular"
         android:text="@string/distance_unit"
+        android:textColor="@color/light_black"
         android:textSize="@dimen/text_xxsmall"
+        app:layout_constraintBottom_toTopOf="@id/time_text_label"
         app:layout_constraintEnd_toEndOf="@id/time_text_label"
-        app:layout_constraintBottom_toTopOf="@id/time_text_label"/>
+        app:layout_constraintTop_toBottomOf="@+id/placeName" />
 
     <TextView
         android:id="@+id/distance_text"
@@ -166,6 +177,7 @@
         android:fontFamily="@font/poppins_regular"
         android:text="8.2"
         android:textSize="@dimen/text_xxsmall"
+        android:textColor="@color/light_black"
         app:layout_constraintTop_toTopOf="@id/distance_text_label"
         app:layout_constraintBottom_toBottomOf="@id/distance_text_label"
         app:layout_constraintEnd_toStartOf="@id/distance_text_label"/>

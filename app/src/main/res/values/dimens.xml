@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="default_button_height">62dp</dimen>
+    <dimen name="home_search_height">52dp</dimen>
     <dimen name="default_corner_radius">42dp</dimen>
     <dimen name="secondary_corner_radius">26dp</dimen>
     <dimen name="splash_screen_text">52dp</dimen>
@@ -8,6 +9,7 @@
     <dimen name="margin_xxsmall">4dp</dimen>
     <dimen name="margin_xsmall">6dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_large_small">12dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_xmedium">18dp</dimen>
     <dimen name="margin_xxmedium">26dp</dimen>

@@ -1,56 +1,132 @@
 package com.example.tourmate
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tourmate.Database.AppDatabase
 import com.example.tourmate.adapters.CategoryAdapter
+import com.example.tourmate.adapters.PlacesAdapter
+import com.example.tourmate.databinding.FragmentHomeBinding
+import com.example.tourmate.entities.PlacesModel
+import com.example.tourmate.managers.SharedPreferencesManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class HomeFragment : Fragment() {
+
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var database: AppDatabase
+    private lateinit var placesAdapter: PlacesAdapter
+    private val cityId = SharedPreferencesManager.getValue("cityId",1)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as NavigationListener).changeBottomMenuVisibility(View.VISIBLE)
+        //val bundle: HomeFragmentArgs by navArgs()
+        database = AppDatabase.getInstance(requireContext())
+
+        lifecycleScope.launch (Dispatchers.IO) {
+            val cityName = database.citiesDao().getCity(cityId).name
+            withContext(Dispatchers.Main){
+                binding.textView.text = cityName
+            }
+        }
 
         val categoryList: List<Category> = listOf(Category.ALL, Category.HISTORICAL, Category.MUSEUMS, Category.PUBLIC)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView1)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = CategoryAdapter(categoryList, { category -> onCategoryClick(category) })
+        val recyclerView1 = view.findViewById<RecyclerView>(R.id.recyclerView1)
+        recyclerView1.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView1.adapter = CategoryAdapter(categoryList, { category -> onCategoryClick(category) })
+
+        val recyclerView2 = view.findViewById<RecyclerView>(R.id.recyclerView2)
+        recyclerView2.layoutManager = LinearLayoutManager(requireContext())
+        lifecycleScope.launch (Dispatchers.IO){
+            val placesList = database.placesDao().getPlace(cityId)
+            placesAdapter = PlacesAdapter(placesList)
+            recyclerView2.adapter = placesAdapter
+
+            placesAdapter.itemClickListener = {id->
+                val placeId = placesList.find { it.id == id }!!.id
+                val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(placeId)
+                Navigation.findNavController(view).navigate(action)
+            }
+        }
+
+        lifecycleScope.launch (Dispatchers.IO){
+            val cities = database.citiesDao().getAllCities()
+            val citiesNames = cities.map { it.name }
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, citiesNames)
+            withContext(Dispatchers.Main) {
+                binding.searchBar.setAdapter(adapter)
+            }
+        }
+
+        binding.searchBar.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                filterPlaces(p0.toString())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        })
 
     }
 
-    private fun onCategoryClick(category: Category) {
-        when (category) {
-            Category.ALL -> {
-                Toast.makeText(requireContext(), "All", Toast.LENGTH_SHORT).show()
+    private fun filterPlaces(text: String) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val selectedCity = database.citiesDao().getAllCities().find { it.name == text }
+            val filteredPlaces:List<PlacesModel> = if (text.isNotEmpty() && selectedCity != null) {
+                database.placesDao().getPlace(selectedCity.id)
+            } else {
+                database.placesDao().getPlace(cityId)
             }
-
-            Category.HISTORICAL -> {
-                Toast.makeText(requireContext(), "Historical", Toast.LENGTH_SHORT).show()
-            }
-
-            Category.MUSEUMS -> {
-                Toast.makeText(requireContext(), "Museums", Toast.LENGTH_SHORT).show()
-            }
-
-            Category.PUBLIC -> {
-                Toast.makeText(requireContext(), "Public", Toast.LENGTH_SHORT).show()
+            withContext(Dispatchers.Main) {
+                placesAdapter.updateData(filteredPlaces)
+                if (selectedCity != null){
+                    binding.textView.text = selectedCity.name
+                }
             }
         }
     }
 
+    private fun onCategoryClick(category: Category) {
+        lifecycleScope.launch (Dispatchers.IO){
+
+            val placesList = if (category.id == Category.ALL.id) {
+                database.placesDao().getPlace(cityId)
+            }else{
+                database.placesDao().getPlaceByCategory(category.id, cityId)
+            }
+            withContext(Dispatchers.Main){
+                placesAdapter.updateData(placesList)
+            }
+        }
+
+    }
 }

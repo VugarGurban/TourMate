@@ -29,5 +29,8 @@ data class PlacesModel (
     var description: String,
 
     @ColumnInfo(name = "link")
-    var link: String
+    var link: String,
+
+    @ColumnInfo(name = "image_path")
+    var image_path: String
 )
