@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var database: AppDatabase
     private lateinit var placesAdapter: PlacesAdapter
-    private val cityId = SharedPreferencesManager.getValue("cityId",1)
+    private var cityId = SharedPreferencesManager.getValue("cityId",1)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -101,15 +101,14 @@ class HomeFragment : Fragment() {
     private fun filterPlaces(text: String) {
         lifecycleScope.launch(Dispatchers.IO) {
             val selectedCity = database.citiesDao().getAllCities().find { it.name == text }
-            val filteredPlaces:List<PlacesModel> = if (text.isNotEmpty() && selectedCity != null) {
-                database.placesDao().getPlace(selectedCity.id)
-            } else {
-                database.placesDao().getPlace(cityId)
-            }
-            withContext(Dispatchers.Main) {
-                placesAdapter.updateData(filteredPlaces)
-                if (selectedCity != null){
+
+            if (text.isNotEmpty() && selectedCity != null) {
+                val filteredPlaces:List<PlacesModel> = database.placesDao().getPlace(selectedCity.id)
+                withContext(Dispatchers.Main) {
                     binding.textView.text = selectedCity.name
+                    placesAdapter.updateData(filteredPlaces)
+                    cityId = selectedCity.id
+                    SharedPreferencesManager.setValue("cityId", selectedCity.id)
                 }
             }
         }
