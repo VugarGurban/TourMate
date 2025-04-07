@@ -7,6 +7,7 @@
     <color name="main_white">#F9F9F9</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="secondary_grey">#d8d8d8</color>
+    <color name="grey_text">#959595</color>
 
 
 </resources>

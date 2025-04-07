@@ -14,4 +14,9 @@
     <string name="categories">Categories</string>
     <string name="your_location">Your Location</string>
     <string name="description">Description</string>
+    <string name="go_to_location">Go to Location</string>
+    <string name="rating">Rating</string>
+    <string name="category">Category</string>
+    <string name="distance">Distance</string>
+    <string name="time">Time</string>
 </resources>

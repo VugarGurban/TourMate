@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
         val recyclerView2 = view.findViewById<RecyclerView>(R.id.recyclerView2)
         recyclerView2.layoutManager = LinearLayoutManager(requireContext())
         lifecycleScope.launch (Dispatchers.IO){
-            val placesList = database.placesDao().getPlace(cityId)
+            val placesList = database.placesDao().getPlaceByCityId(cityId)
             placesAdapter = PlacesAdapter(placesList)
             recyclerView2.adapter = placesAdapter
 
@@ -103,7 +103,7 @@ class HomeFragment : Fragment() {
             val selectedCity = database.citiesDao().getAllCities().find { it.name == text }
 
             if (text.isNotEmpty() && selectedCity != null) {
-                val filteredPlaces:List<PlacesModel> = database.placesDao().getPlace(selectedCity.id)
+                val filteredPlaces:List<PlacesModel> = database.placesDao().getPlaceByCityId(selectedCity.id)
                 withContext(Dispatchers.Main) {
                     binding.textView.text = selectedCity.name
                     placesAdapter.updateData(filteredPlaces)
@@ -118,7 +118,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch (Dispatchers.IO){
 
             val placesList = if (category.id == Category.ALL.id) {
-                database.placesDao().getPlace(cityId)
+                database.placesDao().getPlaceByCityId(cityId)
             }else{
                 database.placesDao().getPlaceByCategory(category.id, cityId)
             }

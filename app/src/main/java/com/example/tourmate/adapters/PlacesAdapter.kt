@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tourmate.Category
 import com.example.tourmate.R
 import com.example.tourmate.entities.PlacesModel
+import com.example.tourmate.utils.getResourceIdByName
 
 class PlacesAdapter(private val placesList: MutableList<PlacesModel>): RecyclerView.Adapter<PlacesAdapter.ViewHolder>() {
 
@@ -33,7 +34,7 @@ class PlacesAdapter(private val placesList: MutableList<PlacesModel>): RecyclerV
             categoryName.text = Category.fromId(place.category_id).displayName
             location.text = place.address
             ratingText.text = place.rate.toString()
-
+            placeImage.setImageResource(getResourceIdByName(placeImage.context,place.image_path))
         }
 
     }
@@ -62,4 +63,5 @@ class PlacesAdapter(private val placesList: MutableList<PlacesModel>): RecyclerV
         placesList.addAll(newPlacesList)
         notifyDataSetChanged()
     }
+
 }
