@@ -8,6 +8,7 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="secondary_grey">#d8d8d8</color>
     <color name="grey_text">#959595</color>
+    <color name="main_orange">#ff992d</color>
 
 
 </resources>

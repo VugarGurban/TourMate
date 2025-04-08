@@ -43,7 +43,7 @@
                 android:drawablePadding="@dimen/padding_large_small"
                 android:drawableTint="@color/main_white"
                 android:fontFamily="@font/poppins_light"
-                android:hint="@string/search"
+                android:hint="@string/search_city"
                 android:paddingStart="@dimen/padding_medium"
                 android:textColor="@color/main_white"
                 android:textColorHint="@color/main_white"
