@@ -49,7 +49,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/plan_your_trip"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_xlarge"
+                android:textSize="@dimen/text_xxlarge"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -23,6 +23,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 "\t\"description\"\tTEXT NOT NULL,\n" +
                 "\t\"link\"\tTEXT NOT NULL,\n" +
                 "\t\"image_path\"\tTEXT NOT NULL,\n" +
+                "\t\"is_liked\"\tINTEGER NOT NULL,\n" +
                 "\t\"id\"PRIMARY KEY AUTOINCREMENT\n" +
                 ");")
     }
@@ -31,6 +32,5 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db!!.execSQL("DROP TABLE IF EXISTS cities")
         db!!.execSQL("DROP TABLE IF EXISTS places")
         onCreate(db)
-
     }
 }

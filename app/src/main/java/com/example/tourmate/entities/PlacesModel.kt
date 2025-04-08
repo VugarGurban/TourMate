@@ -32,5 +32,8 @@ data class PlacesModel (
     var link: String,
 
     @ColumnInfo(name = "image_path")
-    var image_path: String
+    var image_path: String,
+
+    @ColumnInfo(name = "is_liked")
+    var is_liked: Int
 )

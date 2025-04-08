@@ -22,6 +22,7 @@ import kotlinx.coroutines.withContext
 class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private lateinit var database: AppDatabase
+    private var isLiked = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,13 +50,28 @@ class DetailsFragment : Fragment() {
             withContext(Dispatchers.Main){
                 binding.ratingText.text = place.rate.toString()
                 binding.descriptionText.text = place.description
+                binding.placeName.text = place.name
+                binding.addressText.text = place.address
                 val category = Category.fromId(place.category_id)
                 binding.categoryText.text = category.displayName
                 binding.distanceText.text = "~ km"
                 binding.timeText.text = "~ min"
                 binding.placeImage.setImageResource(getResourceIdByName(binding.placeImage.context,place.image_path))
+                updateFavoriteButton(place.is_liked)
 
+                binding.favouritesBtn.setOnClickListener {
+                    isLiked = if (isLiked == 0) 1 else 0
+
+                    lifecycleScope.launch (Dispatchers.IO){
+                        database.placesDao().updateIsLiked(place.id, isLiked)
+                    }
+                    updateFavoriteButton(isLiked)
+                }
             }
+        }
+
+        binding.backBtn.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
@@ -64,4 +80,12 @@ class DetailsFragment : Fragment() {
         startActivity(intent)
     }
 
+    private fun updateFavoriteButton(isLiked: Int){
+        if (isLiked == 1){
+            binding.favouritesBtn.setImageResource(R.drawable.add_to_favourites_selected)
+        } else {
+            binding.favouritesBtn.setImageResource(R.drawable.add_to_favourites)
+
+        }
+    }
 }

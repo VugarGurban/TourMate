@@ -31,14 +31,20 @@
         android:layout_marginStart="@dimen/margin_xmedium"
         android:layout_marginTop="@dimen/margin_xmedium"
         android:layout_marginEnd="@dimen/margin_xmedium"
-        app:cardCornerRadius="@dimen/default_corner_radius"
+        app:cardCornerRadius="@dimen/secondary_corner_radius"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
+
+
+
+            <ImageView
             android:id="@+id/placeImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,6 +55,76 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xmedium"
+            android:layout_marginStart="@dimen/margin_xsmall"
+            android:src="@drawable/back_press"
+            android:backgroundTint="@color/transparent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+            android:id="@+id/favouritesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_xsmall"
+            android:layout_marginTop="@dimen/margin_xmedium"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/add_to_favourites"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/ic_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_xxmedium"
+                android:layout_marginStart="@dimen/margin_xxmedium"
+                android:src="@drawable/ic_location_bold"
+                app:tint="@color/main_white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                />
+
+            <TextView
+                android:id="@+id/addressText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_xsmall"
+                android:layout_marginEnd="@dimen/margin_xxmedium"
+                android:fontFamily="@font/poppins_bold"
+                android:paddingTop="@dimen/padding_xxsmall"
+                android:text="Address"
+                android:textColor="@color/main_white"
+                android:textSize="@dimen/text_xxsmall_large"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/ic_location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/ic_location"
+                app:layout_constraintTop_toTopOf="@id/ic_location" />
+
+            <TextView
+                android:id="@+id/placeName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_xxmedium"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Place Name"
+                android:textColor="@color/main_white"
+                android:textSize="@dimen/text_large"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/ic_location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/ic_location" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
@@ -209,13 +285,5 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.55" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/back_press"
-        android:backgroundTint="@color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

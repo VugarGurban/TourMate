@@ -29,4 +29,11 @@ interface PlacesDao {
 
     @Query("SELECT * FROM places WHERE category_id = :id and city_id = :cityId")
     fun getPlaceByCategory(id: Int, cityId: Int): MutableList<PlacesModel>
+
+    @Query("UPDATE places SET is_liked = :newValue WHERE id = :id")
+    fun updateIsLiked(id: Int, newValue: Int)
+
+    @Query("SELECT * FROM places WHERE is_liked = 1")
+    fun getLikedPlaces(): MutableList<PlacesModel>
+
 }
