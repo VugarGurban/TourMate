@@ -1,5 +1,7 @@
 package com.example.tourmate.adapters
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +12,8 @@ import com.example.tourmate.Category
 import com.example.tourmate.R
 import com.example.tourmate.entities.PlacesModel
 import com.example.tourmate.utils.getResourceIdByName
+import java.io.ByteArrayOutputStream
+
 
 class PlacesAdapter(private val placesList: MutableList<PlacesModel>): RecyclerView.Adapter<PlacesAdapter.ViewHolder>() {
 
@@ -34,6 +38,7 @@ class PlacesAdapter(private val placesList: MutableList<PlacesModel>): RecyclerV
             categoryName.text = Category.fromId(place.category_id).displayName
             location.text = place.address
             ratingText.text = place.rate.toString()
+
             placeImage.setImageResource(getResourceIdByName(placeImage.context,place.image_path))
         }
 

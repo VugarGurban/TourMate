@@ -1,5 +1,6 @@
 package com.example.tourmate
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +25,7 @@ import com.example.tourmate.managers.SharedPreferencesManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.navigation.findNavController
 
 
 class HomeFragment : Fragment() {
@@ -47,10 +50,18 @@ class HomeFragment : Fragment() {
         //val bundle: HomeFragmentArgs by navArgs()
         database = AppDatabase.getInstance(requireContext())
 
+        binding.searchBar.threshold = 0
+        binding.searchBar.setOnFocusChangeListener{ _, hasFocus ->
+            if (hasFocus) {
+                binding.searchBar.showDropDown()
+            }
+        }
+
         lifecycleScope.launch (Dispatchers.IO) {
             val cityName = database.citiesDao().getCity(cityId).name
             withContext(Dispatchers.Main){
                 binding.textView.text = cityName
+
             }
         }
 
@@ -61,15 +72,17 @@ class HomeFragment : Fragment() {
 
         val recyclerView2 = view.findViewById<RecyclerView>(R.id.recyclerView2)
         recyclerView2.layoutManager = LinearLayoutManager(requireContext())
+
         lifecycleScope.launch (Dispatchers.IO){
             val placesList = database.placesDao().getPlaceByCityId(cityId)
             placesAdapter = PlacesAdapter(placesList)
             recyclerView2.adapter = placesAdapter
 
+
             placesAdapter.itemClickListener = {id->
                 val placeId = placesList.find { it.id == id }!!.id
                 val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(placeId)
-                Navigation.findNavController(view).navigate(action)
+                view.findNavController().navigate(action)
             }
         }
 
