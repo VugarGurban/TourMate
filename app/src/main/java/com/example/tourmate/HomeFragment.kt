@@ -109,6 +109,11 @@ class HomeFragment : Fragment() {
 
         })
 
+        binding.chatbotBtn.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToChatbotFragment()
+            view.findNavController().navigate(action)
+        }
+
     }
 
     private fun filterPlaces(text: String) {
