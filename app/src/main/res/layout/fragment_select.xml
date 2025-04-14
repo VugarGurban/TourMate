@@ -58,7 +58,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/plus_jakarta_sans_regular"
+                android:fontFamily="@font/poppins_light"
                 android:text="@string/selectFragment_text"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_small"

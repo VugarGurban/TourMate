@@ -2,6 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="light_black">#1A1A1A</color>
+    <color name="sent_message_background">#1A1A1A</color>
+    <color name="received_message_background">#F0F0F0</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main_blue">#1A8EEA</color>
     <color name="main_white">#F9F9F9</color>
