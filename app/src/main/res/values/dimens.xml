@@ -4,7 +4,7 @@
     <dimen name="home_search_height">52dp</dimen>
     <dimen name="default_corner_radius">42dp</dimen>
     <dimen name="secondary_corner_radius">26dp</dimen>
-    <dimen name="splash_screen_text">52dp</dimen>
+    <dimen name="splash_screen_text">54sp</dimen>
 
     <dimen name="margin_xxsmall">4dp</dimen>
     <dimen name="margin_xsmall">6dp</dimen>

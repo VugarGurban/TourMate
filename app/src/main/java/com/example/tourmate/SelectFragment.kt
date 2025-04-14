@@ -54,12 +54,14 @@ class SelectFragment : Fragment() {
                     //val action = SelectFragmentDirections.actionSelectFragmentToHomeFragment(selectedCity.id)
                     // Navigation.findNavController(it).navigate(action)
                     SharedPreferencesManager.setValue("cityId", selectedCity.id)
-                    findNavController().navigate(R.id.action_selectFragment_to_homeFragment)
+                    findNavController().navigate(SelectFragmentDirections.actionSelectFragmentToHomeFragment())
+                    SharedPreferencesManager.setValue("isFirstTime", false)
                 }else{
                     Toast.makeText(requireContext(), "City not found!", Toast.LENGTH_SHORT).show()
                 }
+            } else{
+                Toast.makeText(requireContext(), "Please enter a city name", Toast.LENGTH_SHORT).show()
             }
-            SharedPreferencesManager.setValue("isFirstTime", false)
         }
 
         lifecycleScope.launch(Dispatchers.IO) {

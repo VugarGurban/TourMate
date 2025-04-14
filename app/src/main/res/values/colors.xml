@@ -9,6 +9,8 @@
     <color name="secondary_grey">#d8d8d8</color>
     <color name="grey_text">#959595</color>
     <color name="main_orange">#ff992d</color>
+    <color name="place_holder_text">#BABABA</color>
+    <color name="chatbot_border">#F0F0F0</color>
 
 
 </resources>
