@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_medium"
+    android:layout_width="250dp"
+    android:layout_height="120dp"
+    android:background="@drawable/suggestion_background">
+
+    <TextView
+        android:id="@+id/suggestionContentText"
+        android:text="Give me a 3-day trip plan for Baku"
+        android:textSize="@dimen/text_xsmall"
+        android:fontFamily="@font/poppins_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/suggestionDescriptionText"
+        android:text="Discover a full 3-day itinerary tailored for this city."
+        android:fontFamily="@font/poppins_light"
+        android:textSize="@dimen/text_xxsmall_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

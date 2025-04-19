@@ -8,12 +8,14 @@ import androidx.navigation.ui.NavigationUI
 import com.example.tourmate.Database.AppDatabase
 import com.example.tourmate.Database.DatabaseCopyHelper
 import com.example.tourmate.managers.SharedPreferencesManager.SharedPreferencesManager
+import com.example.tourmate.retrofit.dao.MessagesRoomDao
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() , NavigationListener {
 private lateinit var  bottomNavigationView:BottomNavigationView
+private lateinit var messagesRoomDao: MessagesRoomDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,4 +51,11 @@ private lateinit var  bottomNavigationView:BottomNavigationView
     override fun changeBottomMenuVisibility(visibility: Int) {
         bottomNavigationView.visibility = visibility
     }
+
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        lifecycleScope.launch {
+//            messagesRoomDao.deleteAllMessages()
+//        }
+//    }
 }

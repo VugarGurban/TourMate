@@ -8,6 +8,7 @@ import com.example.tourmate.dao.CitiesDao
 import com.example.tourmate.dao.PlacesDao
 import com.example.tourmate.entities.CitiesModel
 import com.example.tourmate.entities.PlacesModel
+import com.example.tourmate.retrofit.dao.MessagesRoomDao
 
 @Database(entities = [CitiesModel::class, PlacesModel::class] , version = 1)
 abstract class AppDatabase: RoomDatabase() {

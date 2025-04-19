@@ -85,5 +85,9 @@
         android:id="@+id/chatbotFragment"
         android:name="com.example.tourmate.ChatbotFragment"
         android:label="fragment_chatbot"
-        tools:layout="@layout/fragment_chatbot" />
+        tools:layout="@layout/fragment_chatbot" >
+        <argument
+            android:name="city_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

@@ -52,8 +52,8 @@
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_medium"
-        android:layout_marginTop="@dimen/margin_xxmedium"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_xmedium"
         android:backgroundTint="@color/transparent"
         android:src="@drawable/back_button_chatbot"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,6 +62,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_xsmall"
         android:layout_marginStart="@dimen/margin_xmedium"
         android:text="@string/ai_chatbot"
         android:textColor="@color/light_black"
