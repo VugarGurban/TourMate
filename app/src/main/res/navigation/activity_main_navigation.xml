@@ -87,7 +87,7 @@
         android:label="fragment_chatbot"
         tools:layout="@layout/fragment_chatbot" >
         <argument
-            android:name="city_id"
-            app:argType="integer" />
+            android:name="city_name"
+            app:argType="string" />
     </fragment>
 </navigation>

@@ -7,9 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tourmate.Database.AppDatabase
 import com.example.tourmate.Database.ChatDatabase
 import com.example.tourmate.adapters.MessageAdapter
+import com.example.tourmate.adapters.SuggestionAdapter
 import com.example.tourmate.databinding.FragmentChatbotBinding
 import com.example.tourmate.entities.ChatMessagesModel
 import com.example.tourmate.retrofit.builder.ApiUtils
@@ -23,9 +26,9 @@ import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.core.view.isVisible
 
 class ChatbotFragment : Fragment() {
-
     private lateinit var database: ChatDatabase
     private lateinit var messagesRoomDao: MessagesRoomDao
 
@@ -47,10 +50,47 @@ class ChatbotFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as NavigationListener).changeBottomMenuVisibility(View.GONE)
 
+        //Related with messages
         database = ChatDatabase.getInstance(requireContext())
         messagesRoomDao = database.messagesRoomDao()
-        messageAdapter = MessageAdapter(messageList)
 
+        //Related with suggestions bar
+        val bundle: ChatbotFragmentArgs by navArgs()
+        val selectedCity = bundle.cityName
+
+        val suggestions = listOf(
+            Suggestion("Give me a 3-day trip plan for $selectedCity", "Explore a short but fulfilling itinerary."),
+            Suggestion("What is the top places to visit in $selectedCity?", "Get a list of the must-see places in this city"),
+            Suggestion("What is the best time to visit $selectedCity?", "Find the perfect season to explore this city.")
+        )
+        val suggestionAdapter = SuggestionAdapter(suggestions) { suggestion ->
+            binding.messageText.setText(suggestion)
+            binding.messageText.setSelection(suggestion.length)
+        }
+        binding.recyclerView1.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
+        binding.recyclerView1.adapter = suggestionAdapter
+
+        lifecycleScope.launch(Dispatchers.IO){
+            val hasMessages = messagesRoomDao.getAllMessages().isNotEmpty()
+            withContext(Dispatchers.Main){
+                if (!hasMessages){
+                    binding.recyclerView1.visibility = View.VISIBLE
+                } else{
+                    binding.recyclerView1.visibility = View.GONE
+                }
+            }
+        }
+
+        binding.showSuggestionsBtn.setOnClickListener {
+            if (binding.recyclerView1.isVisible){
+                binding.recyclerView1.visibility = View.GONE
+            } else{
+                binding.recyclerView1.visibility = View.VISIBLE
+            }
+        }
+
+        //Related with messages
+        messageAdapter = MessageAdapter(messageList)
         lifecycleScope.launch(Dispatchers.IO){
             val dbMessages = messagesRoomDao.getAllMessages()
             val mapped = dbMessages.map { ChatMessage(it.message, it.isSentByUser) }
@@ -104,6 +144,7 @@ class ChatbotFragment : Fragment() {
                        val chatResponse = response.body()!!.choices.firstOrNull()!!.message.content
                        messageAdapter.updateLastMessage(chatResponse)
                        binding.recyclerView2.scrollToPosition(messageAdapter.itemCount - 1)
+                       binding.recyclerView1.visibility = View.GONE
 
                        lifecycleScope.launch (Dispatchers.IO) {
                            messagesRoomDao.insertMessage(ChatMessagesModel(message = chatResponse, isSentByUser = false))

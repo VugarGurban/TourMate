@@ -11,23 +11,35 @@
         android:id="@+id/recyclerView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/messageText"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/backBtn" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/messageText"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView2"/>
+
+
 
 
     <EditText
         android:id="@+id/messageText"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="54dp"
         android:layout_marginStart="@dimen/margin_xmedium"
         android:layout_marginEnd="@dimen/margin_small"
         android:layout_marginBottom="@dimen/margin_large"
         android:background="@drawable/chattext_background"
         android:fontFamily="@font/poppins_light"
         android:hint="@string/ask_me_anything"
-        android:paddingStart="@dimen/padding_xmedium"
+        android:paddingStart="@dimen/padding_xlarge"
         android:paddingTop="@dimen/padding_xsmall"
         android:textColor="@color/light_black"
         android:textColorHint="@color/place_holder_text"
@@ -35,6 +47,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/sendBtn"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/showSuggestionsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/suggestions"
+        app:layout_constraintBottom_toBottomOf="@+id/messageText"
+        app:layout_constraintStart_toStartOf="@+id/messageText"
+        app:layout_constraintTop_toTopOf="@+id/messageText" />
+
 
     <ImageButton
         android:id="@+id/sendBtn"

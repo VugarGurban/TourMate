@@ -26,6 +26,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import com.example.tourmate.utils.SwipeToRateCallback
+import java.math.RoundingMode
 
 
 class HomeFragment : Fragment() {
@@ -61,7 +64,6 @@ class HomeFragment : Fragment() {
             val cityName = database.citiesDao().getCity(cityId).name
             withContext(Dispatchers.Main){
                 binding.textView.text = cityName
-
             }
         }
 
@@ -110,10 +112,37 @@ class HomeFragment : Fragment() {
         })
 
         binding.chatbotBtn.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToChatbotFragment()
-            view.findNavController().navigate(action)
+            lifecycleScope.launch (Dispatchers.IO){
+                val city = database.citiesDao().getCity(cityId)
+                val action = HomeFragmentDirections.actionHomeFragmentToChatbotFragment(city.name)
+                withContext(Dispatchers.Main){
+                    view.findNavController().navigate(action)
+                }
+            }
         }
 
+        val swipeToRateCallback = SwipeToRateCallback(requireContext()) { position ->
+            val place = placesAdapter.getPlaceAt(position)
+            RatingDialog{newRating->
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val placeEntity = database.placesDao().getPlaceById(place.id)
+                    val updatedRating = ((placeEntity.rate + newRating)/2).toBigDecimal().setScale(1, RoundingMode.HALF_UP).toFloat()
+                    placeEntity.rate = updatedRating
+                    database.placesDao().updatePlace(placeEntity)
+
+                    val updatedPlaces = database.placesDao().getPlaceByCityId(cityId)
+                    withContext(Dispatchers.Main){
+                        placesAdapter.updateData(updatedPlaces)
+                    }
+                }
+            }.show(parentFragmentManager, "RatingDialog")
+
+            placesAdapter.notifyItemChanged(position)
+
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToRateCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView2)
     }
 
     private fun filterPlaces(text: String) {

@@ -69,4 +69,7 @@ class PlacesAdapter(private val placesList: MutableList<PlacesModel>): RecyclerV
         notifyDataSetChanged()
     }
 
+    fun getPlaceAt(position: Int): PlacesModel {
+        return placesList[position]
+    }
 }
