@@ -83,6 +83,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_xmedium"
+        android:backgroundTint="@color/transparent"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintTop_toTopOf="@id/backBtn"
+        app:layout_constraintBottom_toBottomOf="@id/backBtn"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -116,6 +116,14 @@ class ChatbotFragment : Fragment() {
         binding.backBtn.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
+
+        binding.deleteBtn.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO) {
+                messagesRoomDao.deleteAllMessages()
+            }
+            messageList.clear()
+            messageAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun sendMessageToOpenAI(message: String) {
