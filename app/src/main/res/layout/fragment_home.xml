@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
-    android:background="@color/main_white">
+    android:background="@color/background_white">
     
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_up"
@@ -38,6 +38,7 @@
                 android:id="@+id/search_bar"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_search_height"
+                android:layout_marginTop="@dimen/margin_small"
                 android:background="@drawable/white_border"
                 android:drawableStart="@drawable/search"
                 android:drawablePadding="@dimen/padding_large_small"
@@ -48,6 +49,7 @@
                 android:textColor="@color/main_white"
                 android:textColorHint="@color/main_white"
                 android:textSize="@dimen/text_small"
+                app:layout_constraintTop_toBottomOf="@id/imageView3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -56,7 +58,6 @@
                 android:id="@+id/imageView3"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-
                 android:src="@drawable/main_icon"
                 app:layout_constraintBottom_toTopOf="@+id/search_bar"
                 app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +115,7 @@
             android:layout_height="wrap_content"
             android:text="@string/categories"
             android:textSize="@dimen/text_small"
-            android:textColor="@color/light_black"
+            android:textColor="@color/home_item_text"
             android:fontFamily="@font/poppins_medium"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

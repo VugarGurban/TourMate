@@ -5,26 +5,26 @@
     android:viewportHeight="78">
   <path
       android:pathData="M39,0L39,0A35,35 0,0 1,74 35L74,35A35,35 0,0 1,39 70L39,70A35,35 0,0 1,4 35L4,35A35,35 0,0 1,39 0z"
-      android:fillColor="#1A1A1A"/>
+      android:fillColor="@color/chatbot_button_black"/>
   <path
       android:pathData="M45.25,31.25C45.25,36.088 41.05,40 35.875,40L34.713,41.4L34.025,42.225C33.438,42.925 32.313,42.775 31.925,41.938L30.25,38.25C27.975,36.65 26.5,34.112 26.5,31.25C26.5,26.413 30.7,22.5 35.875,22.5C39.65,22.5 42.912,24.587 44.375,27.587C44.938,28.7 45.25,29.938 45.25,31.25Z"
       android:strokeLineJoin="round"
       android:strokeWidth="1.5"
       android:fillColor="#00000000"
-      android:strokeColor="#F9F9F9"
+      android:strokeColor="@color/chatbot_button_white"
       android:strokeLineCap="round"/>
   <path
       android:pathData="M51.5,36.075C51.5,38.937 50.025,41.475 47.75,43.075L46.075,46.762C45.688,47.6 44.563,47.762 43.975,47.05L42.125,44.825C39.1,44.825 36.4,43.487 34.713,41.4L35.875,40C41.05,40 45.25,36.087 45.25,31.25C45.25,29.937 44.938,28.7 44.375,27.587C48.463,28.525 51.5,31.975 51.5,36.075Z"
       android:strokeLineJoin="round"
       android:strokeWidth="1.5"
       android:fillColor="#00000000"
-      android:strokeColor="#F9F9F9"
+      android:strokeColor="@color/chatbot_button_white"
       android:strokeLineCap="round"/>
   <path
       android:pathData="M32.75,31.25H39"
       android:strokeLineJoin="round"
       android:strokeWidth="1.5"
       android:fillColor="#00000000"
-      android:strokeColor="#F9F9F9"
+      android:strokeColor="@color/chatbot_button_white"
       android:strokeLineCap="round"/>
 </vector>

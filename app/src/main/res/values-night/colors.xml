@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <color name="black">#FF000000</color>-->
-<!--    <color name="light_black">#F9F9F9</color>-->
-<!--    <color name="white">#FFFFFFFF</color>-->
-<!--    <color name="main_blue">#1A8EEA</color>-->
-<!--    <color name="main_white">#1A1A1A</color>-->
-<!--    <color name="transparent">#00FFFFFF</color>-->
-<!--    <color name="secondary_grey">#d8d8d8</color>-->
+    <color name="black">#FF000000</color>
+    <color name="light_black">#1A1A1A</color>
+    <color name="sent_message_background">#1A1A1A</color>
+    <color name="received_message_background">#F0F0F0</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="main_blue">#1A8EEA</color>
+    <color name="main_white">#F9F9F9</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="secondary_grey">#d8d8d8</color>
+    <color name="grey_text">#959595</color>
+    <color name="main_orange">#ff992d</color>
+    <color name="place_holder_text">#BABABA</color>
+    <color name="chatbot_border">#F0F0F0</color>
 </resources>
