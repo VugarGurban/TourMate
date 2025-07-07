@@ -1,10 +1,16 @@
 package com.gvugar.tourmate
 
+import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -89,7 +95,7 @@ class ChatbotFragment : Fragment() {
         }
 
         //Related with messages
-        messageAdapter = MessageAdapter(messageList)
+        messageAdapter = MessageAdapter(messageList) { showReportDialog(requireContext()) }
         lifecycleScope.launch(Dispatchers.IO){
             val dbMessages = messagesRoomDao.getAllMessages()
             val mapped = dbMessages.map { ChatMessage(it.message, it.isSentByUser) }
@@ -122,6 +128,65 @@ class ChatbotFragment : Fragment() {
             }
             messageList.clear()
             messageAdapter.notifyDataSetChanged()
+        }
+
+
+    }
+
+    private fun showReportDialog(context: Context){
+        val reportView = LayoutInflater.from(context).inflate(R.layout.report_dialog, null)
+        val spinner = reportView.findViewById<Spinner>(R.id.spinner_reason)
+        val commentEditText = reportView.findViewById<EditText>(R.id.comment_text)
+        val sendButton = reportView.findViewById<Button>(R.id.sendBtn)
+        val cancelButton = reportView.findViewById<Button>(R.id.cancelBtn)
+
+        ArrayAdapter.createFromResource(
+            context,
+            R.array.report_spinner,
+            R.layout.spinner_item,
+            ).also { adapter ->
+            adapter.setDropDownViewResource(R.layout.spinner_item)
+            spinner.adapter = adapter
+        }
+
+        val reportDialog = AlertDialog.Builder(context).
+                setView(reportView).
+                setCancelable(false).
+                create()
+
+        reportDialog.show()
+
+        cancelButton.setOnClickListener {
+            reportDialog.dismiss()
+        }
+
+        sendButton.setOnClickListener {
+            val selectedReason = spinner.selectedItem.toString()
+
+            if (selectedReason == "Select reason"){
+                Toast.makeText(context, "Please select a reason", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val comment = commentEditText.text.toString()
+
+            reportDialog.dismiss()
+            showConfirmationDialog(context, selectedReason, comment)
+        }
+    }
+
+    private fun showConfirmationDialog(context: Context, selectedReason: String, comment: String) {
+        val confirmView = LayoutInflater.from(context).inflate(R.layout.confirmation_dialog, null)
+        val okButton = confirmView.findViewById<Button>(R.id.ok_button)
+
+        val confirmDialog = AlertDialog.Builder(context).
+                setView(confirmView).
+                setCancelable(false).
+                create()
+
+        confirmDialog.show()
+
+        okButton.setOnClickListener {
+            confirmDialog.dismiss()
         }
     }
 

@@ -16,6 +16,7 @@
     <color name="category">#1A1A1A</color>
     <color name="chatbot_button_black">#1A1A1A</color>
     <color name="chatbot_button_white">#F9F9F9</color>
+    <color name="dialog_background">#F9F9F9</color>
     <color name="button_textcolor">#F9F9F9</color>
     <color name="home_search_box">#F9F9F9</color> <!--keep same-->
     <color name="sent_message_background">#1A1A1A</color>
@@ -24,8 +25,11 @@
     <color name="splashscreen_textcolor">#F9F9F9</color>
     <color name="box_color">#d8d8d8</color>
     <color name="grey_text">#959595</color>
+    <color name="report_button">#959595</color>
     <color name="place_holder_text">#BABABA</color>
     <color name="chatbot_border">#F0F0F0</color>
+    <color name="cancel_color">#FF6666</color>
+    <color name="confirmation_green">#5EDE99</color>
 
 
 </resources>

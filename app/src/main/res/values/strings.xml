@@ -27,4 +27,18 @@
     <string name="ask_me_anything">Ask me anything</string>
     <string name="ai_chatbot">AI Chatbot</string>
     <string name="rate_this_place">Rate this place</string>
+    <string name="report_title">Report response</string>
+    <string name="send_text">Send</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="type_something">Type something...</string>
+    <string name="comment_optional">Comment (Optional)</string>
+    <string name="positive_response">Thanks for your report!</string>
+    <string name="ok">OK</string>
+    <string-array name="report_spinner">
+        <item value="Select reason"/>
+        <item value="Inappropriate content"/>
+        <item value="Offensive language"/>
+        <item value="Spam or misleading content"/>
+        <item value="Other"/>
+    </string-array>
 </resources>
