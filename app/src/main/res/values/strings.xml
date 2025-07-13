@@ -35,10 +35,10 @@
     <string name="positive_response">Thanks for your report!</string>
     <string name="ok">OK</string>
     <string-array name="report_spinner">
-        <item value="Select reason"/>
-        <item value="Inappropriate content"/>
-        <item value="Offensive language"/>
-        <item value="Spam or misleading content"/>
-        <item value="Other"/>
+        <item>Select reason</item>
+        <item>Inappropriate content</item>
+        <item>Offensive language</item>
+        <item>Spam or misleading content</item>
+        <item>Other</item>
     </string-array>
 </resources>

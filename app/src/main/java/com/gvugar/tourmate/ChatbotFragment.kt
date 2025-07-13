@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -140,13 +143,41 @@ class ChatbotFragment : Fragment() {
         val sendButton = reportView.findViewById<Button>(R.id.sendBtn)
         val cancelButton = reportView.findViewById<Button>(R.id.cancelBtn)
 
-        ArrayAdapter.createFromResource(
+        val reasons = resources.getStringArray(R.array.report_spinner)
+
+        /*val adapter = object: ArrayAdapter<String>(
             context,
-            R.array.report_spinner,
             R.layout.spinner_item,
-            ).also { adapter ->
-            adapter.setDropDownViewResource(R.layout.spinner_item)
-            spinner.adapter = adapter
+            reasons
+        ){
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent) as TextView
+                view.text = getItem(position)
+                view.setTextColor(ContextCompat.getColor(context, R.color.button_textcolor))
+                return view
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent) as TextView
+                view.text = getItem(position)
+                view.setTextColor(ContextCompat.getColor(context, R.color.button_textcolor))
+                return view
+            }
+        }*/
+
+        val adapter = ArrayAdapter.createFromResource(requireContext(),R.array.report_spinner, R.layout.spinner_dropdown)
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown)
+        spinner.adapter = adapter
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (view != null){
+                    (parent!!.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(context, R.color.home_item_text))
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                commentEditText.isEnabled = false
+            }
         }
 
         val reportDialog = AlertDialog.Builder(context).
@@ -161,20 +192,19 @@ class ChatbotFragment : Fragment() {
         }
 
         sendButton.setOnClickListener {
-            val selectedReason = spinner.selectedItem.toString()
+            val selectedReasonPosition = spinner.selectedItemPosition
 
-            if (selectedReason == "Select reason"){
+            if (selectedReasonPosition == 0){
                 Toast.makeText(context, "Please select a reason", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            }else{
+                val comment = commentEditText.text.toString()
+                reportDialog.dismiss()
+                showConfirmationDialog(context, selectedReasonPosition, comment)
             }
-            val comment = commentEditText.text.toString()
-
-            reportDialog.dismiss()
-            showConfirmationDialog(context, selectedReason, comment)
         }
     }
 
-    private fun showConfirmationDialog(context: Context, selectedReason: String, comment: String) {
+    private fun showConfirmationDialog(context: Context, selectedReason: Int, comment: String) {
         val confirmView = LayoutInflater.from(context).inflate(R.layout.confirmation_dialog, null)
         val okButton = confirmView.findViewById<Button>(R.id.ok_button)
 
